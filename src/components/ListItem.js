@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const style = {
     border: '1px solid black',
@@ -43,5 +44,10 @@ class ListItem extends React.Component{
         );
     }
 }
+
+ListItem.propTypes = {
+    data: PropTypes.object.isRequired,
+    remove: PropTypes.func.isRequired
+};
 
 export default ListItem;

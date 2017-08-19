@@ -31,6 +31,8 @@
   "author": "Cory House",
   "license": "MIT",
   "dependencies": {
+    "is-ci": "1.0.10",
+    "jest-util": "20.0.3",
     "object-assign": "4.1.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
@@ -38,6 +40,7 @@
     "react-router": "3.0.5",
     "react-router-redux": "4.0.8",
     "redux": "3.6.0",
+    "redux-logger": "3.0.6",
     "redux-thunk": "2.1.0"
   },
   "devDependencies": {
@@ -118,10 +121,16 @@
     }
   },
   "babel": {
-    "presets": ["react", "stage-1"],
+    "presets": [
+      "react",
+      "stage-1"
+    ],
     "env": {
       "development": {
-        "presets": ["env", "react-hmre"]
+        "presets": [
+          "env",
+          "react-hmre"
+        ]
       },
       "production": {
         "presets": [
@@ -140,7 +149,9 @@
         ]
       },
       "test": {
-        "presets": ["env"]
+        "presets": [
+          "env"
+        ]
       }
     }
   },
@@ -151,7 +162,9 @@
       "plugin:import/errors",
       "plugin:import/warnings"
     ],
-    "plugins": ["react"],
+    "plugins": [
+      "react"
+    ],
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 6,
@@ -173,7 +186,10 @@
       "no-console": 1,
       "no-debugger": 1,
       "no-var": 1,
-      "semi": [1, "always"],
+      "semi": [
+        1,
+        "always"
+      ],
       "no-trailing-spaces": 0,
       "eol-last": 0,
       "no-underscore-dangle": 0,
@@ -189,7 +205,9 @@
       "react/forbid-prop-types": [
         1,
         {
-          "forbid": ["any"]
+          "forbid": [
+            "any"
+          ]
         }
       ],
       "react/jsx-boolean-value": 0,

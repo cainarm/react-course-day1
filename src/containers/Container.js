@@ -1,11 +1,13 @@
 import React from 'react';
 import List from '../components/List';
 import Form from '../components/Form';
+import { connect } from 'react-redux';
+import { add, remove, update, getAll } from '../actions/todoAction';
 
 const style = {
     width: 300,
     margin: 'auto'
-}
+};
 
 class Container extends React.Component{
     constructor(){
@@ -16,80 +18,53 @@ class Container extends React.Component{
     }
 
     componentDidMount(){
-        this.getAll();
-    }
-
-    add(value){
-        let values = localStorage.getItem('items');
-
-        if(values !== null) 
-            values = JSON.parse(values);
-        else
-            values = [];
-
-        values.push({name: value});
-
-        localStorage.setItem('items', JSON.stringify(values));
-
-        this.setState({items: values});
-    }
-
-    remove(name){
-        let values = localStorage.getItem('items');
-
-        if(values !== null) 
-            values = JSON.parse(values);
-        else
-            values = [];
-
-        values = values.filter((element) => element.name !== name );
-        
-        localStorage.setItem("items", JSON.stringify(values));
-
-        this.setState({items: values});
-    }
-    
-    update(name ,newName){
-
-        let values = localStorage.getItem('items');
-
-        if(values !== null) 
-            values = JSON.parse(values);
-        else
-            values = [];
-
-        values = values.map( element => {
-            if(element.name === name)
-               element.name = newName;
-
-            return element;
-        });
-
-        localStorage.setItem("items", JSON.stringify(values));
-        
-        this.setState({items: values}); 
-    }
-
-    getAll(){
-        let values = localStorage.getItem("items");
-
-        if(values !== null)
-            this.setState({items: JSON.parse(values)});
-
+        this.props.getAll();
     }
 
     render(){
+        const { 
+            items, 
+            add, 
+            remove, 
+            update
+        } = this.props;
+
         return(
             <div style={style}>
                 <List 
-                    data={this.state.items} 
-                    update={this.update.bind(this)}
-                    remove={this.remove.bind(this)}
+                    data={items} 
+                    update={update}
+                    remove={remove}
                 />
-                <Form add={this.add.bind(this)}/>
+                <Form add={add}/>
             </div>
         );
     }
 }
 
-export default Container;
+let mapStateToProps = (state) => {
+    return {
+        items: state.todos
+    }
+};
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        add: (value) => {
+            dispatch(add(value));
+        },
+        remove: (value) => {
+            dispatch(remove(value));
+        },
+        update: (value, newName) => {
+            dispatch(update(value, newName));
+        },
+        getAll: () => {
+            dispatch(getAll());
+        }
+    }
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

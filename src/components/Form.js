@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const style = {
     input: {
@@ -28,5 +29,10 @@ class Form extends React.Component{
 
     }
 }
+
+Form.propTypes = {
+    add: PropTypes.func.isRequired
+};
+
 
 export default Form;

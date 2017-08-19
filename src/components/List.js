@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ListItem from '../components/ListItem';
 
 class List extends React.Component {
@@ -18,5 +19,11 @@ class List extends React.Component {
         );
     }
 }
+
+List.propTypes = {
+    data: PropTypes.array.isRequired,
+    remove: PropTypes.func.isRequired,
+    update: PropTypes.func.isRequired
+};
 
 export default List;
